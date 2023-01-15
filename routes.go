@@ -1,25 +1,17 @@
 package main
 
 import (
+	"github.com/labstack/echo/v4"
 	"log"
-
-	"github.com/gorilla/mux"
 )
 
 // AddApproutes will add the routes for the application
-func AddApproutes(route *mux.Router) {
+func AddApproutes() *echo.Echo {
 
 	log.Println("Loadeding Routes...")
-
-	route.HandleFunc("/", RenderHome)
-
-	route.HandleFunc("/profile", RenderProfile)
-
-	route.HandleFunc("/login/facebook", InitFacebookLogin)
-
-	route.HandleFunc("/facebook/callback", HandleFacebookLogin)
-
-	route.HandleFunc("/userDetails", GetUserDetails).Methods("GET")
+	c := echo.New()
+	c.GET("/", HandleFacebookLogin)
 
 	log.Println("Routes are Loaded.")
+	return c
 }

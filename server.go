@@ -4,7 +4,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
@@ -14,11 +13,7 @@ func main() {
 
 	log.Println("Server will start at http://localhost:8000/")
 
-	ConnectDatabase()
+	e := AddApproutes()
 
-	route := mux.NewRouter()
-
-	AddApproutes(route)
-
-	log.Fatal(http.ListenAndServe(":8000", route))
+	log.Fatal(http.ListenAndServe(":8000", e))
 }
